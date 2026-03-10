@@ -734,10 +734,12 @@ body::before {
 .chat-backdrop {
   flex: 1;
   background: rgba(0,0,0,0.55);
-  pointer-events: all;
+  pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s;
 }
+
+.chat-backdrop.visible { pointer-events: all; }
 
 .chat-backdrop.visible { opacity: 1; }
 
