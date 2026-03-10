@@ -39,7 +39,7 @@ exports.handler = async (event) => {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-5',
         max_tokens: 1000,
         system: body.system,
         messages: body.messages
@@ -47,6 +47,14 @@ exports.handler = async (event) => {
     })
 
     const data = await response.json()
+
+    if (!response.ok) {
+      return {
+        statusCode: response.status,
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        body: JSON.stringify({ error: data.error?.message || JSON.stringify(data) })
+      }
+    }
 
     return {
       statusCode: 200,
@@ -60,7 +68,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 500,
       headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ error: err.message })
+      body: JSON.stringify({ error: err.message || String(err) })
     }
   }
 }
