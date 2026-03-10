@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { weeks, quizQuestions, schoolData } from './data.js'
 import PhilChat from './PhilChat.jsx'
 import duckImg from '/phil.png'
